@@ -10,6 +10,18 @@
     <%= csrf_meta_tag %>
   </head>
   <body>
+     <% flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, class: name %>
+    <% end -%>
+
+    <ul>
+      <% if current_user %>
+        <li><%= current_user.username %></li>
+        <li><%= link_to "Sign Out", session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to "Sign In", new_session_path %></li>
+      <% end %>
+    </ul>
     <%= yield %>
   </body>
 </html>
